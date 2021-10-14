@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse, Canceler } from "axios";
 import { useEffect, useState } from "react";
+import RocketList from "./components/rocketList/RocketList";
 import { RocketDto } from "./types/rocketDto";
 
 function App() {
@@ -36,20 +37,16 @@ function App() {
     setQuery(searchValue);
   };
 
-  let RocketList = rockets.map((r) => {
+  let rocketList = rockets.map((rocket) => {
     return (
-      <div key={r.id}>
-        <ul>
-          <li>{r.rocket_name}</li>
-        </ul>
-      </div>
+      <RocketList key={rocket.id} {...{rocket}}/>
     );
   });
 
   return (
     <div className="App">
       <input type="text" onChange={handleSearch} />
-      {RocketList}
+      {rocketList}
       <div>Loading...</div>
       <div>Error</div>
     </div>
