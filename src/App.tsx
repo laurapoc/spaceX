@@ -1,23 +1,56 @@
-import { useState } from "react";
-import useRocketSearch from "./useRocketSearch";
+import axios, { AxiosRequestConfig, AxiosResponse, Canceler } from "axios";
+import { useEffect, useState } from "react";
+import { RocketDto } from "./types/rocketDto";
 
 function App() {
   const [query, setQuery] = useState<string>("");
+  const [rockets, setRockets] = useState<RocketDto[]>([]);
+
+  useEffect(() => {
+    let cancel: Canceler;
+    let config: AxiosRequestConfig<RocketDto[]> = {
+      method: "GET",
+      url: "",
+      cancelToken: new axios.CancelToken((token) => (cancel = token)),
+    };
+    axios
+      .get<RocketDto[]>("https://api.spacexdata.com/v3/rockets", config)
+      .then(
+        (
+          response: AxiosResponse<RocketDto[], AxiosRequestConfig<RocketDto[]>>
+        ) => {
+          const data = response.data;
+          setRockets(data);
+          console.log(data);
+        }
+      )
+      .catch((err) => {
+        if (axios.isCancel(err)) return;
+        return err;
+      });
+    return () => cancel();
+  }, []);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchValue = event.currentTarget.value;
     setQuery(searchValue);
   };
 
-  useRocketSearch(query);
+  let RocketList = rockets.map((r) => {
+    return (
+      <div key={r.id}>
+        <ul>
+          <li>{r.rocket_name}</li>
+        </ul>
+      </div>
+    );
+  });
 
   return (
     <div className="App">
       <input type="text" onChange={handleSearch} />
-      <div>Rocket</div>
-      <div>Rocket</div>
-      <div>Rocket</div>
-      <div>Loading...</div> axios.Canceltoken
+      {RocketList}
+      <div>Loading...</div>
       <div>Error</div>
     </div>
   );
