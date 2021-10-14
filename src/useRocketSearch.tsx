@@ -1,23 +1,24 @@
-import { useEffect } from "react";
-import axios from "axios";
+import { useEffect} from "react";
+import axios, { Canceler } from "axios";
 
-const useRocketSearch = (query: any) => {
+const useRocketSearch = (query: string | undefined) => {
   useEffect(() => {
+    let cancel: Canceler;
     axios({
       method: "GET",
       url: "https://api.spacexdata.com/v3/rockets",
-      params: { query: query },
-    }).then((res) => {
-      console.log(res.data);
-    });
-  
+      params: { q: query },
+      cancelToken: new axios.CancelToken((token) => (cancel = token)),
+    })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        if (axios.isCancel(err)) return;
+      });
+    return () => cancel();
   }, [query]);
-
-  return (
-    <div>
-      <h2>Rockets</h2>
-    </div>
-  );
+  return null;
 };
 
 export default useRocketSearch;

@@ -2,23 +2,22 @@ import { useState } from "react";
 import useRocketSearch from "./useRocketSearch";
 
 function App() {
-const [query, setQuery] = useState<string>()
+  const [query, setQuery] = useState<string>("");
 
-useRocketSearch(query)
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const searchValue = event.currentTarget.value;
+    setQuery(searchValue);
+  };
 
-const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-event.preventDefault();
-const searchValue = event.currentTarget.value;
-setQuery(searchValue);
-}
+  useRocketSearch(query);
 
   return (
     <div className="App">
-      <input type="text" onChange={handleInputChange} />
+      <input type="text" onChange={handleSearch} />
       <div>Rocket</div>
       <div>Rocket</div>
       <div>Rocket</div>
-      <div>Loading...</div>
+      <div>Loading...</div> axios.Canceltoken
       <div>Error</div>
     </div>
   );
