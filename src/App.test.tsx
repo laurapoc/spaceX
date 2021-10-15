@@ -4,6 +4,7 @@ import axios from "axios";
 
 import App from "./App";
 import { MOCKED_RETURNED_DATA } from "./constants/constants";
+import { RocketDto } from "./types/rocketDto";
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -11,9 +12,7 @@ const mockedAxios = axios as jest.Mocked<typeof axios>;
 describe("<App />", () => {
   beforeEach(() => {
     mockedAxios.get.mockResolvedValueOnce({
-      data: [
-        MOCKED_RETURNED_DATA
-      ],
+      data: [MOCKED_RETURNED_DATA],
     });
   });
 
@@ -38,6 +37,20 @@ describe("<App />", () => {
 
     await waitFor(() => {
       expect(screen.getByText("Falcon")).toBeInTheDocument();
+    });
+  });
+});
+
+describe("App when errors happens", () => {
+  beforeEach(() => {
+    mockedAxios.get.mockRejectedValueOnce(new Error("Something went wrong..."));
+  });
+
+  it("renders error message when gets data undefined", async () => {
+    render(<App />);
+
+    await waitFor(() => {
+      expect(screen.getByText("Something went wrong...")).toBeInTheDocument();
     });
   });
 });
