@@ -1,19 +1,20 @@
 import axios, { AxiosRequestConfig, AxiosResponse, Canceler } from "axios";
 import { useEffect, useState } from "react";
-import Table from "./components/table/Table";
+import SearchRocket from "./components/searchRocket/SearchRocket";
+// import Table from "./components/table/Table";
 import { RocketDto } from "./types/rocketDto";
 
-const colNames = [
-  "Rocket name",
-  "Diameter",
-  "Height",
-  "Mass",
-  "Cost per launch",
-];
+// const colNames = [
+//   "Rocket name",
+//   "Diameter",
+//   "Height",
+//   "Mass",
+//   "Cost per launch",
+// ];
 
 function App() {
-  const [query, setQuery] = useState<string>("");
   const [rockets, setRockets] = useState<RocketDto[]>([]);
+
   const [loading, setloading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -39,23 +40,24 @@ function App() {
       )
       .catch((err) => {
         if (axios.isCancel(err)) return;
-        setError(true)
+        setError(true);
         return err;
       });
     return () => cancel();
   }, []);
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const searchValue = event.currentTarget.value;
-    setQuery(searchValue);
-  };
+  // const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const searchValue = event.currentTarget.value;
+  //   setQuery(searchValue);
+  // };
 
   return (
     <div className="App">
-      <input type="text" onChange={handleSearch} />
-      <Table {...{ rockets }} colNames={colNames} />
+      {/* <input type="text" onChange={handleSearch} /> */}
+      <SearchRocket {...{ rockets }} />
+      {/* <Table {...{ rockets }} colNames={colNames} /> */}
       <div>{loading && "Loading..."}</div>
-      <div>{error&& "Something whent wrong..."}</div>
+      <div>{error && "Something whent wrong..."}</div>
     </div>
   );
 }

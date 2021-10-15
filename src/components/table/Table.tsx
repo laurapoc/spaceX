@@ -2,22 +2,22 @@ import React from "react";
 import { RocketDto } from "../../types/rocketDto";
 
 type Props = {
-  rockets: RocketDto[];
+  searchResults: RocketDto[];
   colNames: Array<string>;
 };
 
-type TableRowsProps = {
-  rocketName: string;
+export type TableRowsProps = {
+  rocket_name: string;
   diameter: number;
   height: number;
   mass: number;
   cost_per_launch: number;
 };
 
-const Table = ({ rockets, colNames }: Props) => {
-  const ROCKET_TABLE_VALUES: TableRowsProps[] = rockets.map((r) => {
+const Table = ({ searchResults, colNames }: Props) => {
+  const ROCKET_TABLE_VALUES: TableRowsProps[] = searchResults.map((r) => {
     return {
-      rocketName: r.rocket_name,
+      rocket_name: r.rocket_name,
       diameter: r.diameter.meters,
       height: r.height.meters,
       mass: r.mass.kg,
@@ -27,7 +27,7 @@ const Table = ({ rockets, colNames }: Props) => {
 
   return (
     <div>
-      {rockets.length > 0 && (
+      {searchResults.length > 0 && (
         <table
           cellSpacing="0"
           style={{ width: "100%", height: "auto", padding: "5px 10px" }}
