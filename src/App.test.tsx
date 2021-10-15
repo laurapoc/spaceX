@@ -3,6 +3,7 @@ import "@testing-library/jest-dom";
 import axios from "axios";
 
 import App from "./App";
+import { MOCKED_RETURNED_DATA } from "./constants/constants";
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
@@ -11,13 +12,7 @@ describe("<App />", () => {
   beforeEach(() => {
     mockedAxios.get.mockResolvedValueOnce({
       data: [
-        {
-          rocket_name: "Falcon",
-          diameter: 1.68,
-          height: 22.25,
-          mass: 30146,
-          cost_per_launch: 6700000,
-        },
+        MOCKED_RETURNED_DATA
       ],
     });
   });
