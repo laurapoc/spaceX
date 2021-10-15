@@ -1,4 +1,3 @@
-import React from "react";
 import { RocketModel } from "../../types/rocketModel";
 
 type Props = {
