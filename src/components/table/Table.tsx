@@ -1,29 +1,23 @@
 import React from "react";
 import { RocketDto } from "../../types/rocketDto";
+import { RocketModel } from "../../types/rocketModel";
 
 type Props = {
-  searchResults: RocketDto[];
+  searchResults: RocketModel[];
   colNames: Array<string>;
 };
 
-export type TableRowsProps = {
-  rocket_name: string;
-  diameter: number;
-  height: number;
-  mass: number;
-  cost_per_launch: number;
-};
 
 const Table = ({ searchResults, colNames }: Props) => {
-  const ROCKET_TABLE_VALUES: TableRowsProps[] = searchResults.map((r) => {
-    return {
-      rocket_name: r.rocket_name,
-      diameter: r.diameter.meters,
-      height: r.height.meters,
-      mass: r.mass.kg,
-      cost_per_launch: r.cost_per_launch,
-    };
-  });
+  // const ROCKET_TABLE_VALUES: RocketModel[] = searchResults.map((r) => {
+  //   return {
+  //     rocket_name: r.rocket_name,
+  //     diameter: r.diameter.meters,
+  //     height: r.height.meters,
+  //     mass: r.mass.kg,
+  //     cost_per_launch: r.cost_per_launch,
+  //   };
+  // });
 
   return (
     <div>
@@ -40,7 +34,7 @@ const Table = ({ searchResults, colNames }: Props) => {
             </tr>
           </thead>
           <tbody>
-            {Object.values(ROCKET_TABLE_VALUES).map((obj, index) => (
+            {Object.values(searchResults).map((obj, index) => (
               <tr key={index}>
                 {Object.values(obj).map((value, idx) => (
                   <td key={idx}>{value}</td>

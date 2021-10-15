@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { RocketDto } from "../../types/rocketDto";
+import { RocketModel } from "../../types/rocketModel";
 import Table from "../table/Table";
 
 type Props = {
@@ -16,7 +17,7 @@ const colNames = [
 
 const SearchRocket = (rockets: Props) => {
   const [query, setQuery] = useState<string>("");
-  const [searchResults, setSearchResults] = useState<RocketDto[]>([]);
+  const [searchResults, setSearchResults] = useState<RocketModel[]>([]);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchValue = event.currentTarget.value;
@@ -24,14 +25,25 @@ const SearchRocket = (rockets: Props) => {
   };
 
   useEffect(() => {
-
-    const results = rockets.rockets.filter(
-      (rocket) => rocket.rocket_name.toLowerCase().includes(query)
-
-    );
+    const ROCKET_TABLE_VALUES: RocketModel[] = rockets.rockets.map((r) => {
+      return {
+        rocket_name: r.rocket_name,
+        diameter: r.diameter.meters,
+        height: r.height.meters,
+        mass: r.mass.kg,
+        cost_per_launch: r.cost_per_launch,
+      };
+    });
+    const results = ROCKET_TABLE_VALUES.filter((rocket) => {
+      return Object.keys(rocket).some((key) =>
+        rocket[key as keyof RocketModel]
+          .toString()
+          .toLowerCase()
+          .includes(query)
+      );
+    });
     setSearchResults(results);
-    console.log(results);
-  }, [query, rockets]);
+  }, [query, rockets.rockets]);
 
   return (
     <div>
