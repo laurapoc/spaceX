@@ -1,7 +1,15 @@
 import axios, { AxiosRequestConfig, AxiosResponse, Canceler } from "axios";
 import { useEffect, useState } from "react";
-import RocketList from "./components/rocketList/RocketList";
+import Table from "./components/table/Table";
 import { RocketDto } from "./types/rocketDto";
+
+const colNames = [
+  "Rocket name",
+  "Diameter",
+  "Height",
+  "Mass",
+  "Cost per launch",
+];
 
 function App() {
   const [query, setQuery] = useState<string>("");
@@ -37,16 +45,10 @@ function App() {
     setQuery(searchValue);
   };
 
-  let rocketList = rockets.map((rocket) => {
-    return (
-      <RocketList key={rocket.id} {...{rocket}}/>
-    );
-  });
-
   return (
     <div className="App">
       <input type="text" onChange={handleSearch} />
-      {rocketList}
+      <Table {...{ rockets }} colNames={colNames} />
       <div>Loading...</div>
       <div>Error</div>
     </div>
