@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { COL_NAMES } from "../../constants/constants";
 import { RocketDto } from "../../types/rocketDto";
 import { RocketModel } from "../../types/rocketModel";
 import Table from "../table/Table";
@@ -6,14 +7,6 @@ import Table from "../table/Table";
 type Props = {
   rockets: RocketDto[];
 };
-
-const colNames = [
-  "Rocket name",
-  "Diameter",
-  "Height",
-  "Mass",
-  "Cost per launch",
-];
 
 const SearchRocket = (rockets: Props) => {
   const [query, setQuery] = useState<string>("");
@@ -48,7 +41,7 @@ const SearchRocket = (rockets: Props) => {
   return (
     <div>
       <input type="text" placeholder="Search" onChange={handleSearch} />
-      <Table {...{ searchResults }} colNames={colNames} />
+      <Table {...{ searchResults }} colNames={COL_NAMES} />
     </div>
   );
 };

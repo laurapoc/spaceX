@@ -1,5 +1,4 @@
 import React from "react";
-import { RocketDto } from "../../types/rocketDto";
 import { RocketModel } from "../../types/rocketModel";
 
 type Props = {
@@ -7,18 +6,7 @@ type Props = {
   colNames: Array<string>;
 };
 
-
 const Table = ({ searchResults, colNames }: Props) => {
-  // const ROCKET_TABLE_VALUES: RocketModel[] = searchResults.map((r) => {
-  //   return {
-  //     rocket_name: r.rocket_name,
-  //     diameter: r.diameter.meters,
-  //     height: r.height.meters,
-  //     mass: r.mass.kg,
-  //     cost_per_launch: r.cost_per_launch,
-  //   };
-  // });
-
   return (
     <div>
       {searchResults.length > 0 && (
