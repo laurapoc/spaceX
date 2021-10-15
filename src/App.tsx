@@ -14,8 +14,12 @@ const colNames = [
 function App() {
   const [query, setQuery] = useState<string>("");
   const [rockets, setRockets] = useState<RocketDto[]>([]);
+  const [loading, setloading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
+    setloading(true);
+    setError(false);
     let cancel: Canceler;
     let config: AxiosRequestConfig<RocketDto[]> = {
       method: "GET",
@@ -30,11 +34,12 @@ function App() {
         ) => {
           const data = response.data;
           setRockets(data);
-          console.log(data);
+          setloading(false);
         }
       )
       .catch((err) => {
         if (axios.isCancel(err)) return;
+        setError(true)
         return err;
       });
     return () => cancel();
@@ -49,8 +54,8 @@ function App() {
     <div className="App">
       <input type="text" onChange={handleSearch} />
       <Table {...{ rockets }} colNames={colNames} />
-      <div>Loading...</div>
-      <div>Error</div>
+      <div>{loading && "Loading..."}</div>
+      <div>{error&& "Something whent wrong..."}</div>
     </div>
   );
 }
