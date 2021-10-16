@@ -32,12 +32,6 @@ export const styles = createUseStyles({
     display: "flex",
     flexDirection: "column",
   },
-  tableBlock__tableHead: {
-    width: "20%",
-    display: "flex",
-    paddingRight: "5%",
-    justifyContent: "flex-end",
-  },
 
   row: {
     backgroundColor: "white",
@@ -57,7 +51,7 @@ export const styles = createUseStyles({
 
   table_first_row_data: {
     display: "flex",
-    width: "20%",
+    width: "15%",
     paddingLeft: "5%",
     justifyContent: "flex-start",
   },

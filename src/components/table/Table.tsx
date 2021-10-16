@@ -17,9 +17,12 @@ const Table = ({ searchResults, colNames }: Props) => {
           <thead className={classes.tableHead}>
             <tr className={classes.tableHead_row}>
               {colNames.map((headerItem, index) => (
-                <th className={classes.tableBlock__tableHead} key={index}>
+                index !== 0 ? <th className={classes.table_row_data} key={index}>
+                {headerItem}
+              </th> : <th className={classes.table_first_row_data} key={index}>
                   {headerItem}
                 </th>
+                
               ))}
             </tr>
           </thead>
