@@ -89,7 +89,7 @@ export type RocketDto = {
   };
   landing_legs: {
     number: number;
-    material: string;
+    material: string | null;
   };
   flickr_images: string[];
   wikipedia: string;

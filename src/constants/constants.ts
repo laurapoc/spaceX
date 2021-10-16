@@ -1,3 +1,6 @@
+import { RocketDto } from "../types/rocketDto";
+import { RocketModel } from "../types/rocketModel";
+
 export const COL_NAMES = [
   "Rocket name",
   "Diameter",
@@ -6,7 +9,7 @@ export const COL_NAMES = [
   "Cost per launch",
 ];
 
-export const MOCKED_RETURNED_DATA = [
+export const MOCKED_RETURNED_DATA: RocketModel[] = [
   {
     rocket_name: "Falcon",
     diameter: 1.68,
@@ -23,7 +26,7 @@ export const MOCKED_RETURNED_DATA = [
   },
 ];
 
-export const MOCKED_RAW_RETURNED_DATA = [
+export const MOCKED_RAW_RETURNED_DATA: RocketDto[] = [
   {
     id: 1,
     active: false,

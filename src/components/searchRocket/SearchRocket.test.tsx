@@ -5,7 +5,6 @@ import SearchRocket from "./SearchRocket";
 
 import { RocketDto } from "../../types/rocketDto";
 import { MOCKED_RAW_RETURNED_DATA } from "../../constants/constants";
-import { NOTIMP } from "dns";
 
 const rockets: RocketDto[] = MOCKED_RAW_RETURNED_DATA;
 
