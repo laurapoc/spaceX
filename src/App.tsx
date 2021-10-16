@@ -3,11 +3,14 @@ import { useEffect, useState } from "react";
 
 import SearchRocket from "./components/searchRocket/SearchRocket";
 import { RocketDto } from "./types/rocketDto";
+import { styles } from "./styles";
 
 function App() {
   const [rockets, setRockets] = useState<RocketDto[]>([]);
   const [loading, setloading] = useState(true);
   const [error, setError] = useState(false);
+
+  const classes = styles();
 
   const getRocketData = () => {
     axios
@@ -31,10 +34,12 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <SearchRocket {...{ rockets }} />
-      <div>{loading && "Loading..."}</div>
-      <div>{error && "Something went wrong..."}</div>
+    <div className={classes.app}>
+      <div className={classes.appContainer}>
+        <SearchRocket {...{ rockets }} />
+        <div>{loading && "Loading..."}</div>
+        <div>{error && "Something went wrong..."}</div>
+      </div>
     </div>
   );
 }

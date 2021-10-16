@@ -1,3 +1,5 @@
+import { styles } from "./styles";
+
 import { RocketModel } from "../../types/rocketModel";
 
 type Props = {
@@ -6,26 +8,35 @@ type Props = {
 };
 
 const Table = ({ searchResults, colNames }: Props) => {
+  const classes = styles();
+
   return (
-    <div>
+    <div className={classes.tableBlock}>
       {searchResults.length > 0 && (
-        <table
-          cellSpacing="0"
-          style={{ width: "100%", height: "auto", padding: "5px 10px" }}
-        >
-          <thead>
-            <tr>
+        <table className={classes.table}>
+          <thead className={classes.tableHead}>
+            <tr className={classes.tableHead_row}>
               {colNames.map((headerItem, index) => (
-                <th key={index}>{headerItem}</th>
+                <th className={classes.tableBlock__tableHead} key={index}>
+                  {headerItem}
+                </th>
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className={classes.tableBody}>
             {Object.values(searchResults).map((obj, index) => (
-              <tr key={index}>
-                {Object.values(obj).map((value, idx) => (
-                  <td key={idx}>{value}</td>
-                ))}
+              <tr className={classes.row} key={index}>
+                {Object.values(obj).map((value, idx) =>
+                  idx !== 0 ? (
+                    <td className={classes.table_row_data} key={idx}>
+                      {value}
+                    </td>
+                  ) : (
+                    <td className={classes.table_first_row_data} key={idx}>
+                      {value}
+                    </td>
+                  )
+                )}
               </tr>
             ))}
           </tbody>

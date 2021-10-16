@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
+
+import { styles } from "./styles";
+
+import Table from "../table/Table";
+
 import { COL_NAMES } from "../../constants/constants";
 import { RocketDto } from "../../types/rocketDto";
 import { RocketModel } from "../../types/rocketModel";
-import Table from "../table/Table";
 
 type Props = {
   rockets: RocketDto[];
@@ -11,6 +15,8 @@ type Props = {
 const SearchRocket = (rockets: Props) => {
   const [query, setQuery] = useState<string>("");
   const [searchResults, setSearchResults] = useState<RocketModel[]>([]);
+
+  const classes = styles();
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchValue = event.currentTarget.value;
@@ -39,8 +45,18 @@ const SearchRocket = (rockets: Props) => {
   }, [query, rockets.rockets]);
 
   return (
-    <div>
-      <input type="text" placeholder="Search" data-testid="search-input" onChange={handleSearch} />
+    <div className={classes.searchBlock}>
+      <div className={classes.inputBlock}>
+        <h1 className={classes.inputBlock__header}>SpaceX rockets</h1>
+        <p className={classes.inputBlock__resultParagraph}>{searchResults && `${searchResults.length} results`}</p>
+        <input
+          className={classes.inputBlock__input}
+          type="text"
+          placeholder="Search"
+          data-testid="search-input"
+          onChange={handleSearch}
+        />
+      </div>
       <Table {...{ searchResults }} colNames={COL_NAMES} />
     </div>
   );
