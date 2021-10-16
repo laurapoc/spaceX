@@ -18,6 +18,7 @@ export const styles = createUseStyles({
     display: "flex",
     width: "100%",
     fontWeight: 600,
+    paddingBottom: "1%",
   },
 
   tableHead_row: {

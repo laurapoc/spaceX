@@ -8,6 +8,8 @@ import { COL_NAMES } from "../../constants/constants";
 import { RocketDto } from "../../types/rocketDto";
 import { RocketModel } from "../../types/rocketModel";
 
+import searchImage from "../../assets/icons/search.svg";
+
 type Props = {
   rockets: RocketDto[];
 };
@@ -38,7 +40,7 @@ const SearchRocket = (rockets: Props) => {
         rocket[key as keyof RocketModel]
           .toString()
           .toLowerCase()
-          .includes(query)
+          .includes(query.toLowerCase())
       );
     });
     setSearchResults(results);
@@ -48,14 +50,20 @@ const SearchRocket = (rockets: Props) => {
     <div className={classes.searchBlock}>
       <div className={classes.inputBlock}>
         <h1 className={classes.inputBlock__header}>SpaceX rockets</h1>
-        <p className={classes.inputBlock__resultParagraph}>{searchResults && `${searchResults.length} results`}</p>
-        <input
-          className={classes.inputBlock__input}
-          type="text"
-          placeholder="Search"
-          data-testid="search-input"
-          onChange={handleSearch}
-        />
+        <p className={classes.inputBlock__resultParagraph}>
+          {searchResults && `${searchResults.length} results`}
+        </p>
+        <div className={classes.searchInputBlock}>
+          <img className={classes.searchImage} src={searchImage} alt="icon" />
+          <input
+            className={classes.input}
+            type="text"
+            placeholder="Search"
+            data-testid="search-input"
+            autoFocus
+            onChange={handleSearch}
+          />
+        </div>
       </div>
       <Table {...{ searchResults }} colNames={COL_NAMES} />
     </div>

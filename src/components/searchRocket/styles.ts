@@ -6,6 +6,7 @@ export const styles = createUseStyles({
   },
 
   inputBlock: {
+    width: "100%",
     margin: "auto",
     display: "flex",
     justifyContent: "space-around",
@@ -20,13 +21,27 @@ export const styles = createUseStyles({
     fontSize: "1.6rem",
   },
 
-  inputBlock__input: {
+  searchInputBlock: {
+    position: "relative",
     width: "60%",
+  },
+
+  searchImage: {
+    position: "absolute",
+    left: "8px",
+    top: "3px",
+    zIndex: 1,
+  },
+
+  input: {
+    width: "95%",
     borderRadius: "20px",
     border: "none",
     backgroundColor: "rgb(237, 239, 250)",
     lineHeight: 2,
     fontSize: "large",
+    display: "block",
+    paddingLeft: "60px",
   },
 
   inputBlock__resultParagraph: {
