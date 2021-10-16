@@ -91,7 +91,7 @@ export type RocketDto = {
     number: number;
     material: string;
   };
-  flickr_images: [string, string];
+  flickr_images: string[];
   wikipedia: string;
   description: string;
   rocket_id: string;

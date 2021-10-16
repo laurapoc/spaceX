@@ -40,7 +40,7 @@ const SearchRocket = (rockets: Props) => {
 
   return (
     <div>
-      <input type="text" placeholder="Search" onChange={handleSearch} />
+      <input type="text" placeholder="Search" data-testid="search-input" onChange={handleSearch} />
       <Table {...{ searchResults }} colNames={COL_NAMES} />
     </div>
   );
