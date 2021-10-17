@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 import Table from "./Table";
+
 import { RocketModel } from "../../types/rocketModel";
 import { COL_NAMES, MOCKED_RETURNED_DATA } from "../../constants/constants";
 

@@ -34,7 +34,7 @@ export const styles = createUseStyles({
   },
 
   input: {
-    width: "95%",
+    width: "98%",
     borderRadius: "20px",
     border: "none",
     backgroundColor: "rgb(237, 239, 250)",
@@ -42,6 +42,7 @@ export const styles = createUseStyles({
     fontSize: "large",
     display: "block",
     paddingLeft: "60px",
+    boxSizing: "border-box",
   },
 
   inputBlock__resultParagraph: {

@@ -9,6 +9,9 @@ export const styles = createUseStyles({
   appContainer: {
     width: "80%",
     margin: "auto",
+  },
 
+  notification: {
+    textAlign: "center",
   },
 });

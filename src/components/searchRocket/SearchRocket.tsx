@@ -3,11 +3,9 @@ import React, { useEffect, useState } from "react";
 import { styles } from "./styles";
 
 import Table from "../table/Table";
-
 import { COL_NAMES } from "../../constants/constants";
 import { RocketDto } from "../../types/rocketDto";
 import { RocketModel } from "../../types/rocketModel";
-
 import searchImage from "../../assets/icons/search.svg";
 
 type Props = {

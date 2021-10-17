@@ -37,8 +37,8 @@ function App() {
     <div className={classes.app}>
       <div className={classes.appContainer}>
         <SearchRocket {...{ rockets }} />
-        <div>{loading && "Loading..."}</div>
-        <div>{error && "Something went wrong..."}</div>
+        <div className={classes.notification}>{loading && "Loading..."}</div>
+        <div className={classes.notification}>{error && "Something went wrong..."}</div>
       </div>
     </div>
   );
