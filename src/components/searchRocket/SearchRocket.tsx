@@ -27,9 +27,9 @@ const SearchRocket = (rockets: Props) => {
     const ROCKET_TABLE_VALUES: RocketModel[] = rockets.rockets.map((r) => {
       return {
         rocket_name: r.rocket_name,
-        diameter: r.diameter.meters,
-        height: r.height.meters,
-        mass: r.mass.kg,
+        diameter: `${r.diameter.meters}m`,
+        height: `${r.height.meters}m`,
+        mass: `${r.mass.kg}kg`,
         cost_per_launch: r.cost_per_launch,
       };
     });
