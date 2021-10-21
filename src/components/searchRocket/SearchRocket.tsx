@@ -41,17 +41,76 @@ const SearchRocket = (rockets: Props) => {
           .includes(query.toLowerCase())
       );
     });
-    const sortedResults = results.sort((a, b) => {
-        if (a.rocket_name < b.rocket_name) {
-          return -1;
-        }
-        if (a.rocket_name > b.rocket_name) {
-          return 1;
-        }
-        return 0;
-      });
-    setSearchResults(sortedResults);
+    setSearchResults(results);
   }, [query, rockets.rockets]);
+
+  const onColumnClick = (headerItem: string): void | undefined => {
+    let sortedResults: RocketModel[] = [];
+
+    if (headerItem === COL_NAMES[0]) {
+      sortedResults = [
+        ...searchResults.sort((a, b) => {
+          if (a.rocket_name < b.rocket_name) {
+            return -1;
+          }
+          if (a.rocket_name > b.rocket_name) {
+            return 1;
+          }
+          return 0;
+        }),
+      ];
+    } else if (headerItem === COL_NAMES[1]) {
+      sortedResults = [
+        ...searchResults.sort((a, b) => {
+          if (a.diameter < b.diameter) {
+            return -1;
+          }
+          if (a.diameter > b.diameter) {
+            return 1;
+          }
+          return 0;
+        }),
+      ];
+    } else if (headerItem === COL_NAMES[2]) {
+      sortedResults = [
+        ...searchResults.sort((a, b) => {
+          if (a.height < b.height) {
+            return -1;
+          }
+          if (a.height > b.height) {
+            return 1;
+          }
+          return 0;
+        }),
+      ];
+    } else if (headerItem === COL_NAMES[3]) {
+      sortedResults = [
+        ...searchResults.sort((a, b) => {
+          if (a.mass < b.mass) {
+            return -1;
+          }
+          if (a.mass > b.mass) {
+            return 1;
+          }
+          return 0;
+        }),
+      ];
+    } else if (headerItem === COL_NAMES[4]) {
+      sortedResults = [
+        ...searchResults.sort((a, b) => {
+          if (a.cost_per_launch < b.cost_per_launch) {
+            return -1;
+          }
+          if (a.cost_per_launch > b.cost_per_launch) {
+            return 1;
+          }
+          return 0;
+        }),
+      ];
+    }
+
+    setSearchResults(sortedResults);
+  };
 
   return (
     <div className={classes.searchBlock}>
@@ -72,7 +131,11 @@ const SearchRocket = (rockets: Props) => {
           />
         </div>
       </div>
-      <Table {...{ searchResults }} colNames={COL_NAMES} />
+      <Table
+        {...{ searchResults }}
+        colNames={COL_NAMES}
+        onColumnClick={onColumnClick}
+      />
     </div>
   );
 };

@@ -5,10 +5,15 @@ import { RocketModel } from "../../types/rocketModel";
 type Props = {
   searchResults: RocketModel[];
   colNames: Array<string>;
+  onColumnClick: (headerItem: string) => void | undefined;
 };
 
-const Table = ({ searchResults, colNames }: Props) => {
+const Table = ({ searchResults, colNames, onColumnClick }: Props) => {
   const classes = styles();
+
+  const columnClickHandler = (headerItem: string) => {
+    onColumnClick(headerItem);
+  };
 
   return (
     <div className={classes.tableBlock}>
@@ -18,13 +23,18 @@ const Table = ({ searchResults, colNames }: Props) => {
             <tr className={classes.tableHead_row}>
               {colNames.map((headerItem, index) =>
                 index !== 0 ? (
-                  <th className={classes.table_row_data} key={index}>
+                  <th
+                    className={classes.table_row_data}
+                    key={index}
+                    onClick={() => columnClickHandler(headerItem)}
+                  >
                     {headerItem}
                   </th>
                 ) : (
                   <th
                     className={classes.table_first_row_data}
                     key={index}
+                    onClick={() => columnClickHandler(headerItem)}
                   >
                     {headerItem}
                   </th>
