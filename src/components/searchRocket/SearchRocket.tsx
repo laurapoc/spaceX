@@ -41,7 +41,16 @@ const SearchRocket = (rockets: Props) => {
           .includes(query.toLowerCase())
       );
     });
-    setSearchResults(results);
+    const sortedResults = results.sort((a, b) => {
+        if (a.rocket_name < b.rocket_name) {
+          return -1;
+        }
+        if (a.rocket_name > b.rocket_name) {
+          return 1;
+        }
+        return 0;
+      });
+    setSearchResults(sortedResults);
   }, [query, rockets.rockets]);
 
   return (

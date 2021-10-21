@@ -16,14 +16,20 @@ const Table = ({ searchResults, colNames }: Props) => {
         <table className={classes.table}>
           <thead className={classes.tableHead}>
             <tr className={classes.tableHead_row}>
-              {colNames.map((headerItem, index) => (
-                index !== 0 ? <th className={classes.table_row_data} key={index}>
-                {headerItem}
-              </th> : <th className={classes.table_first_row_data} key={index}>
-                  {headerItem}
-                </th>
-                
-              ))}
+              {colNames.map((headerItem, index) =>
+                index !== 0 ? (
+                  <th className={classes.table_row_data} key={index}>
+                    {headerItem}
+                  </th>
+                ) : (
+                  <th
+                    className={classes.table_first_row_data}
+                    key={index}
+                  >
+                    {headerItem}
+                  </th>
+                )
+              )}
             </tr>
           </thead>
           <tbody className={classes.tableBody}>
