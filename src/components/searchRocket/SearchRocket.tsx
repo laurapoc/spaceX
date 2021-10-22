@@ -46,68 +46,35 @@ const SearchRocket = (rockets: Props) => {
 
   const onColumnClick = (headerItem: string): void | undefined => {
     let sortedResults: RocketModel[] = [];
+    let firstElement: string | number;
+    let secondElement: string | number;
 
-    if (headerItem === COL_NAMES[0]) {
-      sortedResults = [
-        ...searchResults.sort((a, b) => {
-          if (a.rocket_name < b.rocket_name) {
-            return -1;
-          }
-          if (a.rocket_name > b.rocket_name) {
-            return 1;
-          }
-          return 0;
-        }),
-      ];
-    } else if (headerItem === COL_NAMES[1]) {
-      sortedResults = [
-        ...searchResults.sort((a, b) => {
-          if (a.diameter < b.diameter) {
-            return -1;
-          }
-          if (a.diameter > b.diameter) {
-            return 1;
-          }
-          return 0;
-        }),
-      ];
-    } else if (headerItem === COL_NAMES[2]) {
-      sortedResults = [
-        ...searchResults.sort((a, b) => {
-          if (a.height < b.height) {
-            return -1;
-          }
-          if (a.height > b.height) {
-            return 1;
-          }
-          return 0;
-        }),
-      ];
-    } else if (headerItem === COL_NAMES[3]) {
-      sortedResults = [
-        ...searchResults.sort((a, b) => {
-          if (a.mass < b.mass) {
-            return -1;
-          }
-          if (a.mass > b.mass) {
-            return 1;
-          }
-          return 0;
-        }),
-      ];
-    } else if (headerItem === COL_NAMES[4]) {
-      sortedResults = [
-        ...searchResults.sort((a, b) => {
-          if (a.cost_per_launch < b.cost_per_launch) {
-            return -1;
-          }
-          if (a.cost_per_launch > b.cost_per_launch) {
-            return 1;
-          }
-          return 0;
-        }),
-      ];
-    }
+    sortedResults = [
+      ...searchResults.sort((a, b) => {
+        if (headerItem === COL_NAMES[0]) {
+          firstElement = a.rocket_name;
+          secondElement = b.rocket_name;
+        } else if (headerItem === COL_NAMES[1]) {
+          firstElement = a.diameter;
+          secondElement = b.diameter;
+        } else if (headerItem === COL_NAMES[2]) {
+          firstElement = a.height;
+          secondElement = b.height;
+        } else if (headerItem === COL_NAMES[3]) {
+          firstElement = a.mass;
+          secondElement = b.mass;
+        } else if (headerItem === COL_NAMES[4]) {
+          firstElement = a.cost_per_launch;
+          secondElement = b.cost_per_launch;
+        }
+
+        return firstElement < secondElement
+          ? -1
+          : firstElement > secondElement
+          ? 1
+          : 0;
+      }),
+    ];
 
     setSearchResults(sortedResults);
   };
