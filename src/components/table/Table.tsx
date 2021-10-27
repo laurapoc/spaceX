@@ -27,7 +27,6 @@ const Table = ({ searchResults, colNames, onColumnClick }: Props) => {
                   <th
                     className={classes.table_row_data}
                     key={index}
-                    // onClick={() => columnClickHandler(headerItem)}
                   >
                     {headerItem}
                     <button className={classes.sortButton} onClick={() => columnClickHandler(headerItem)}><img src={arrowImage} alt="sort arrow" className={classes.sortImage}/></button>
