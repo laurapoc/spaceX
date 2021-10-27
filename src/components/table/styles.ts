@@ -55,4 +55,22 @@ export const styles = createUseStyles({
     paddingLeft: "5%",
     justifyContent: "flex-start",
   },
+
+  sortButton: {
+    width: "20px",
+    height: "20px",
+    marginLeft: "2%",
+    position: "relative",
+    border: "none",
+    borderRadius: "5px",
+    "&:hover": {
+      backgroundColor: "white",
+    },
+  },
+
+  sortImage: {
+    position: "absolute",
+    left: "-3px",
+    top: "-4px",
+  },
 });

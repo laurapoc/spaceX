@@ -1,6 +1,7 @@
 import { styles } from "./styles";
 
 import { RocketModel } from "../../types/rocketModel";
+import arrowImage from "../../assets/icons/arrow_down.svg"
 
 type Props = {
   searchResults: RocketModel[];
@@ -26,17 +27,19 @@ const Table = ({ searchResults, colNames, onColumnClick }: Props) => {
                   <th
                     className={classes.table_row_data}
                     key={index}
-                    onClick={() => columnClickHandler(headerItem)}
+                    // onClick={() => columnClickHandler(headerItem)}
                   >
                     {headerItem}
+                    <button className={classes.sortButton} onClick={() => columnClickHandler(headerItem)}><img src={arrowImage} alt="sort arrow" className={classes.sortImage}/></button>
                   </th>
                 ) : (
                   <th
                     className={classes.table_first_row_data}
                     key={index}
-                    onClick={() => columnClickHandler(headerItem)}
+                    
                   >
                     {headerItem}
+                    <button className={classes.sortButton} onClick={() => columnClickHandler(headerItem)}><img src={arrowImage} alt="sort arrow" className={classes.sortImage}/></button>
                   </th>
                 )
               )}
