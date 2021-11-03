@@ -1,14 +1,20 @@
 import { styles } from "./styles";
 
 import { RocketModel } from "../../types/rocketModel";
+import arrowImage from "../../assets/icons/arrow_down.svg"
 
 type Props = {
   searchResults: RocketModel[];
   colNames: Array<string>;
+  onColumnClick: (headerItem: string) => void | undefined;
 };
 
-const Table = ({ searchResults, colNames }: Props) => {
+const Table = ({ searchResults, colNames, onColumnClick }: Props) => {
   const classes = styles();
+
+  const columnClickHandler = (headerItem: string) => {
+    onColumnClick(headerItem);
+  };
 
   return (
     <div className={classes.tableBlock}>
@@ -16,14 +22,26 @@ const Table = ({ searchResults, colNames }: Props) => {
         <table className={classes.table}>
           <thead className={classes.tableHead}>
             <tr className={classes.tableHead_row}>
-              {colNames.map((headerItem, index) => (
-                index !== 0 ? <th className={classes.table_row_data} key={index}>
-                {headerItem}
-              </th> : <th className={classes.table_first_row_data} key={index}>
-                  {headerItem}
-                </th>
-                
-              ))}
+              {colNames.map((headerItem, index) =>
+                index !== 0 ? (
+                  <th
+                    className={classes.table_row_data}
+                    key={index}
+                  >
+                    {headerItem}
+                    <button className={classes.sortButton} onClick={() => columnClickHandler(headerItem)}><img src={arrowImage} alt="sort arrow" className={classes.sortImage}/></button>
+                  </th>
+                ) : (
+                  <th
+                    className={classes.table_first_row_data}
+                    key={index}
+                    
+                  >
+                    {headerItem}
+                    <button className={classes.sortButton} onClick={() => columnClickHandler(headerItem)}><img src={arrowImage} alt="sort arrow" className={classes.sortImage}/></button>
+                  </th>
+                )
+              )}
             </tr>
           </thead>
           <tbody className={classes.tableBody}>

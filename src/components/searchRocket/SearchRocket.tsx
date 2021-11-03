@@ -27,9 +27,9 @@ const SearchRocket = (rockets: Props) => {
     const ROCKET_TABLE_VALUES: RocketModel[] = rockets.rockets.map((r) => {
       return {
         rocket_name: r.rocket_name,
-        diameter: `${r.diameter.meters}m`,
-        height: `${r.height.meters}m`,
-        mass: `${r.mass.kg}kg`,
+        diameter: `${r.diameter.meters} m`,
+        height: `${r.height.meters} m`,
+        mass: `${r.mass.kg} kg`,
         cost_per_launch: r.cost_per_launch,
       };
     });
@@ -43,6 +43,43 @@ const SearchRocket = (rockets: Props) => {
     });
     setSearchResults(results);
   }, [query, rockets.rockets]);
+
+  const onColumnClick = (headerItem: string): void | undefined => {
+    let sortedResults: RocketModel[] = [];
+    let firstElement: string | number;
+    let secondElement: string | number;
+
+    sortedResults = [
+      ...searchResults.sort((a, b) => {
+        if (headerItem === COL_NAMES[0]) {
+          firstElement = a.rocket_name;
+          secondElement = b.rocket_name;
+        } else if (headerItem === COL_NAMES[1]) {
+          firstElement = a.diameter;
+          secondElement = b.diameter;
+        } else if (headerItem === COL_NAMES[2]) {
+          firstElement = a.height;
+          secondElement = b.height;
+        } else if (headerItem === COL_NAMES[3]) {
+          firstElement = a.mass;
+          secondElement = b.mass;
+        } else if (headerItem === COL_NAMES[4]) {
+          firstElement = a.cost_per_launch;
+          secondElement = b.cost_per_launch;
+        }
+
+        // Sort numbers in a string using localeCompare
+        return firstElement
+          .toString()
+          .localeCompare(secondElement.toString(), undefined, {
+            numeric: true,
+            sensitivity: "base",
+          });
+      }),
+    ];
+
+    setSearchResults(sortedResults);
+  };
 
   return (
     <div className={classes.searchBlock}>
@@ -63,7 +100,11 @@ const SearchRocket = (rockets: Props) => {
           />
         </div>
       </div>
-      <Table {...{ searchResults }} colNames={COL_NAMES} />
+      <Table
+        {...{ searchResults }}
+        colNames={COL_NAMES}
+        onColumnClick={onColumnClick}
+      />
     </div>
   );
 };
