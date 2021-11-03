@@ -27,9 +27,9 @@ const SearchRocket = (rockets: Props) => {
     const ROCKET_TABLE_VALUES: RocketModel[] = rockets.rockets.map((r) => {
       return {
         rocket_name: r.rocket_name,
-        diameter: `${r.diameter.meters}m`,
-        height: `${r.height.meters}m`,
-        mass: `${r.mass.kg}kg`,
+        diameter: `${r.diameter.meters} m`,
+        height: `${r.height.meters} m`,
+        mass: `${r.mass.kg} kg`,
         cost_per_launch: r.cost_per_launch,
       };
     });
@@ -68,11 +68,13 @@ const SearchRocket = (rockets: Props) => {
           secondElement = b.cost_per_launch;
         }
 
-        return firstElement < secondElement
-          ? -1
-          : firstElement > secondElement
-          ? 1
-          : 0;
+        // Sort numbers in a string using localeCompare
+        return firstElement
+          .toString()
+          .localeCompare(secondElement.toString(), undefined, {
+            numeric: true,
+            sensitivity: "base",
+          });
       }),
     ];
 
