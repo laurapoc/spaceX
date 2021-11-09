@@ -14,19 +14,19 @@ function App() {
   const classes = styles();
 
   const getRocketData = () => {
-    axios
-      .get<RocketDto[]>("https://api.spacexdata.com/v3/rockets")
-      .then((response) => {
-        const data = response.data;
-        setRockets(data);
-        setloading(false);
-      })
-      .catch((err) => {
-        if (axios.isCancel(err)) return;
-        setloading(false);
-        setError(true);
-        return err;
-      });
+      axios
+        .get<RocketDto[]>("https://api.spacexdata.com/v3/rockets")
+        .then((response) => {
+          const data = response.data;
+          setRockets(data);
+          setloading(false);
+        })
+        .catch((err) => {
+          if (axios.isCancel(err)) return;
+          setloading(false);
+          setError(true);
+          return err;
+        });
   };
 
   useEffect(() => {
